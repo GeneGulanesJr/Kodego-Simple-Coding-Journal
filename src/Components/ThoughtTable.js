@@ -1,6 +1,6 @@
 import DataTable from 'react-data-table-component';
 import React from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, Select } from '@chakra-ui/react';
 
 let x = localStorage.getItem("thoughts");
 
@@ -39,7 +39,8 @@ const columns = [
     //create a Select input to update value
     //in the localstorage
     cell: row => (
-      <select value={row.mood} onChange={(e) => {
+      <Select value={row.mood} onChange={(e) => {
+        window.location.reload();
         let y = localStorage.getItem("thoughts");
         let z = JSON.parse(y);
         z.forEach(function(item, index) {
@@ -53,7 +54,8 @@ const columns = [
         <option value="sad">Sad</option>
         <option value="angry">Angry</option>
         <option value="neutral">Neutral</option>
-      </select>
+      </Select>
+
     ),
   },
   {
@@ -71,7 +73,48 @@ const columns = [
 
 
 
-
+const conditionalRowStyles = [
+  {
+    when: row => row.mood === 'happy',
+    style: {
+      backgroundColor: 'rgba(63, 195, 128, 0.9)',
+      color: 'white',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
+  {
+    when: row => row.mood === 'sad',
+    style: {
+      backgroundColor: 'rgba(248, 148, 6, 0.9)',
+      color: 'white',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
+  {
+    when: row => row.mood === 'angry',
+    style: {
+      backgroundColor: 'rgba(242, 38, 19, 0.9)',
+      color: 'white',
+      '&:hover': {
+        cursor: 'not-allowed',
+      },
+    },
+  },
+  {
+    when: row => row.mood === 'neutral',
+    style: {
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      color: 'black',
+      '&:hover': {
+        cursor: 'not-allowed',
+      },
+    },
+  },
+];
 
 
 export default function ThoughtTable() {
@@ -80,6 +123,7 @@ export default function ThoughtTable() {
       columns={columns}
       data={data}
       pagination={true}
+      conditionalRowStyles={conditionalRowStyles}
     />
   );
 };

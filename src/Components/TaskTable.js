@@ -50,6 +50,7 @@ const columns = [
       <Select
         value={row.status}
         onChange={e => {
+          window.location.reload();
           const newData = [...data];
           const index = newData.indexOf(row);
           newData[index] = { ...row, status: e.target.value };
@@ -78,13 +79,45 @@ const columns = [
 ];
 
 
-
+const conditionalRowStyles = [
+{
+	when: row => row.status === 'todo',
+	style: {
+			backgroundColor: 'rgba(63, 195, 128, 0.9)',
+			color: 'white',
+		'&:hover': {
+			cursor: 'pointer',
+			},
+		},
+},
+	{
+		when: row => row.status === 'inprogress',
+	style: {
+		backgroundColor: 'rgba(248, 148, 6, 0.9)',
+		color: 'white',
+			'&:hover': {
+				cursor: 'pointer',
+		},
+	},
+	},
+	{
+    when: row => row.status === 'done',
+  		style: {
+			backgroundColor: 'rgba(242, 38, 19, 0.9)',
+   			color: 'white',
+   			'&:hover': {
+  				cursor: 'not-allowed',
+    			},
+		},
+	},
+];
 export default function TaskTable() {
   return (
     <DataTable
       columns={columns}
       data={data}
       pagination={true}
+      conditionalRowStyles={conditionalRowStyles}
     />
   );
 };
