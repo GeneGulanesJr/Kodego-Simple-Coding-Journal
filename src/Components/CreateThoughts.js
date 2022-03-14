@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Textarea } from '@chakra-ui/react';
+import { Button, Input, Select, Textarea } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 
 export default function CreateThoughts() {
@@ -15,7 +15,7 @@ export default function CreateThoughts() {
       title: data.Title,
       thought: data.Thoughts,
       date: data.Date,
-      type: 'thoughts'
+      mood: data.Mood,
     }
     objects.push(newData)
     console.log(newData);
@@ -36,7 +36,12 @@ export default function CreateThoughts() {
       <Input type="text" placeholder="Title" {...register("Title", {required: true, min: 1})} />
       <Input type='datetime-local' placeholder='Date' {...register('Date', { required: true, maxLength: 80 })} />
       <Textarea {...register('Thoughts', { required: true, min: 1, maxLength: 100 })} />
-
+      <Select {...register("Mood", { required: true })}>
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="angry">Angry</option>
+        <option value="neutral">Neutral</option>
+      </Select>
 
       <Button type='submit' bg={'blue.400'}
               color={'white'}

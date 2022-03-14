@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Textarea } from '@chakra-ui/react';
+import { Button, Input, Select, Textarea } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 
 
@@ -15,7 +15,7 @@ export default function CreateTask() {
       title: data.Title,
       task: data.Task,
       date: data.Date,
-      type: 'task'
+      status: data.Status
     }
     objects.push(newData)
     console.log(newData);
@@ -45,7 +45,11 @@ export default function CreateTask() {
       <Input type="text" placeholder="Title" {...register("Title", {required: true, min: 1})} />
       <Input type='datetime-local' placeholder='Date' {...register('Date', { required: true, maxLength: 80 })} />
       <Textarea {...register('Task', { required: true, min: 1, maxLength: 100 })} />
-
+      <Select {...register("Status", { required: true })}>
+        <option value="todo">To Do</option>
+        <option value="inprogress">In Progress</option>
+        <option value=" done"> Done</option>
+      </Select>
 
 
       <Button type='submit' bg={'blue.400'}

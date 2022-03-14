@@ -1,5 +1,6 @@
 import DataTable from 'react-data-table-component';
 import React from 'react';
+import { Button } from '@chakra-ui/react';
 
 let x = localStorage.getItem("thoughts");
 
@@ -34,15 +35,37 @@ const columns = [
     selector: row => row.date, sortable: true,
   },
   {
+    name: 'Mood',
+    //create a Select input to update value
+    //in the localstorage
+    cell: row => (
+      <select value={row.mood} onChange={(e) => {
+        let y = localStorage.getItem("thoughts");
+        let z = JSON.parse(y);
+        z.forEach(function(item, index) {
+          if (item.id === row.id) {
+            z[index].mood = e.target.value;
+          }
+        });
+        localStorage.setItem("thoughts", JSON.stringify(z));
+      }}>
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="angry">Angry</option>
+        <option value="neutral">Neutral</option>
+      </select>
+    ),
+  },
+  {
     name:'Action',
     //delete the specific id
-    cell: row => <button onClick={() => {
+    cell: row => <Button  colorScheme='blue' onClick={() => {
       let x = localStorage.getItem("thoughts");
       let y = JSON.parse(x);
       let z = y.filter(item => item.id !== row.id);
       localStorage.setItem("thoughts", JSON.stringify(z));
       window.location.reload();
-    }}>Delete</button>
+    }}>Delete</Button>
   }
 ];
 
