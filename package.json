@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icon": "^2.0.5",
+    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -11,9 +13,13 @@
     "@testing-library/user-event": "^12.8.3",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2",
+    "react-data-table-component": "^7.4.7",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.28.0",
     "react-icons": "^3.11.0",
     "react-scripts": "5.0.0",
+    "styled-components": "^5.3.3",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
